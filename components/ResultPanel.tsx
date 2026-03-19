@@ -32,9 +32,9 @@ export default function ResultPanel({ result, loading }: Props) {
   ]
 
   return (
-    <div className="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden">
+    <div className="h-full flex flex-col bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden">
       {/* Tabs */}
-      <div className="flex border-b border-zinc-800">
+      <div className="shrink-0 flex border-b border-zinc-800">
         {tabs.map((tab) => (
           <button
             key={tab.id}
@@ -51,7 +51,7 @@ export default function ResultPanel({ result, loading }: Props) {
       </div>
 
       {/* Content */}
-      <div className="p-6 min-h-48">
+      <div className="flex-1 overflow-y-auto p-6">
         {loading ? (
           <Skeleton />
         ) : !result ? (

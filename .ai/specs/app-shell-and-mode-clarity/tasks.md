@@ -1,13 +1,13 @@
 # Tasks — App Shell & Mode Clarity
 
-## T-01 · Data: Framework type uitbreiden
+## T-01 · Data: Framework type uitbreiden ✅
 **Bestand:** `types/index.ts`
 - Voeg `label: string`, `shortDescription: string`, `technicalName: string` toe aan het `Framework` interface/type
 - **Done:** TypeScript compileert zonder fouten
 
 ---
 
-## T-02 · Data: frameworks.ts invullen
+## T-02 · Data: frameworks.ts invullen ✅
 **Bestand:** `data/frameworks.ts`
 - Voeg `label`, `shortDescription` en `technicalName` toe aan alle zes frameworks:
   - `core` → Fast / "Snel en helder, voor short-form posts" / C.O.R.E.
@@ -20,7 +20,7 @@
 
 ---
 
-## T-03 · Component: TopBar.tsx aanmaken
+## T-03 · Component: TopBar.tsx aanmaken ✅
 **Bestand:** `components/TopBar.tsx` (nieuw)
 - `<header>` met merknaam "PromptPilot" en tagline
 - `sticky top-0`, max 56px hoog, donker thema
@@ -28,7 +28,7 @@
 
 ---
 
-## T-04 · Component: HeroSection verwijderen
+## T-04 · Component: HeroSection verwijderen ✅
 **Bestand:** `components/HeroSection.tsx`
 - Bestand verwijderen
 - Import in `app/page.tsx` verwijderen
@@ -36,16 +36,16 @@
 
 ---
 
-## T-05 · Page shell: app/page.tsx refactoren
+## T-05 · Page shell: app/page.tsx refactoren ✅
 **Bestand:** `app/page.tsx`
 - Importeer `TopBar`
-- Bouw de layout: `<TopBar />` + `<div class="flex h-[calc(100vh-56px)]">` met `<aside>` en `<main>`
-- Desktop: naast elkaar; mobile (`< lg`): gestapeld
+- Bouw de layout: `<TopBar />` + flex container met `<aside>` (sidebar) en `<main>`
+- Desktop: naast elkaar (`lg:flex-row`); mobile: gestapeld (`flex-col`)
 - **Done:** Op desktop ziet de browser geen verticale scrollbar op de pagina zelf; op mobile werkt stacked layout
 
 ---
 
-## T-06 · Component: FilterPanel sidebar-stijl
+## T-06 · Component: FilterPanel sidebar-stijl ✅
 **Bestand:** `components/FilterPanel.tsx`
 - Omzetten van horizontale chipgroepen naar verticale sidebar-secties
 - Secties: Campagne, Doelgroep, Platform, Tone, Mode
@@ -55,16 +55,16 @@
 
 ---
 
-## T-07 · Component: Framework card-list in FilterPanel
+## T-07 · Component: Framework card-list in FilterPanel ✅
 **Bestand:** `components/FilterPanel.tsx`
 - Vervang framework chips door klikbare card-items
 - Elk card toont: `label` (bold) + `shortDescription` (small, gray) + `technicalName` (xs badge)
-- Geselecteerd: `bg-gray-700 border-blue-500`; niet-geselecteerd: `bg-gray-800 border-transparent`
+- Geselecteerd: `bg-zinc-700 border-indigo-500`; niet-geselecteerd: `bg-zinc-900 border-zinc-800`
 - **Done:** Frameworkselectie werkt; geselecteerd item is visueel duidelijk
 
 ---
 
-## T-08 · Component: ResultPanel intern scroll
+## T-08 · Component: ResultPanel intern scroll ✅
 **Bestand:** `components/ResultPanel.tsx`
 - Wrapper: `h-full flex flex-col`
 - Tabs-balk: `shrink-0`

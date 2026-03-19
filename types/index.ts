@@ -32,6 +32,9 @@ export interface Framework {
   name: string
   goal: string
   description: string
+  label: string
+  shortDescription: string
+  technicalName: string
 }
 
 export interface PromptTemplate {

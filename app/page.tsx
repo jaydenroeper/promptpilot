@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import HeroSection from '@/components/HeroSection'
+import TopBar from '@/components/TopBar'
 import FilterPanel from '@/components/FilterPanel'
 import ResultPanel from '@/components/ResultPanel'
 import type { GenerateRequest, GenerateResponse, AudienceId, PlatformId, ToneId, FrameworkId } from '@/types'
@@ -63,14 +63,12 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col h-screen bg-zinc-950 text-white overflow-hidden">
-      {/* Hero — vaste hoogte bovenaan */}
-      <div className="shrink-0">
-        <HeroSection />
-      </div>
+      <TopBar />
 
-      {/* Two-column zone — vult resterende hoogte, elke kolom scrollt intern */}
-      <div className="flex-1 overflow-hidden grid grid-cols-1 lg:grid-cols-2 gap-6 px-6 pb-6">
-        <aside className="overflow-y-auto">
+      {/* Two-column zone — vult resterende hoogte */}
+      <div className="flex-1 overflow-hidden flex flex-col lg:flex-row">
+        {/* Sidebar */}
+        <aside className="lg:w-80 shrink-0 overflow-y-auto border-b border-zinc-800 lg:border-b-0 lg:border-r lg:border-zinc-800">
           <FilterPanel
             filters={filters}
             topic={topic}
@@ -82,9 +80,10 @@ export default function HomePage() {
           />
         </aside>
 
-        <main className="overflow-y-auto flex flex-col gap-4">
+        {/* Output */}
+        <main className="flex-1 overflow-hidden flex flex-col p-6 gap-4">
           {error && (
-            <div className="bg-red-950 border border-red-800 text-red-300 text-sm px-4 py-3 rounded-xl">
+            <div className="shrink-0 bg-red-950 border border-red-800 text-red-300 text-sm px-4 py-3 rounded-xl">
               {error}
             </div>
           )}
