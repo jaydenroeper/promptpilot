@@ -5,37 +5,48 @@
 - React 19
 - TypeScript
 - Tailwind CSS 4
+- OpenAI SDK (`openai` npm package)
 
 ## Principes
 - Simplicity over completeness
 - MVP first — demo-waarde boven volledigheid
-- Minimale dependencies — niets toevoegen wat niet nodig is
-- Leesbare code — korte comments waar keuzes niet vanzelfsprekend zijn
+- Minimale dependencies
+- Leesbare code
 
 ## Architectuur
-Single-page Next.js app. Alle interactie draait client-side met React state. Geen route handlers of server actions nodig voor MVP.
+Single-page Next.js app. Filters zijn client-side state. AI-aanroep gaat via een Next.js Route Handler (`app/api/generate/route.ts`) zodat de API key server-side blijft.
+
+## Environment
+```
+OPENAI_API_KEY=sk-...
+```
+Zet dit in `.env.local` (nooit committen).
+
+## AI-integratie
+- Model: `gpt-4o-mini` (snel en goedkoop voor demo)
+- Aanroep via `openai` SDK in de route handler
+- Prompt templates komen uit `data/promptLibrary.ts` — nooit hardcoded strings in componenten
+- Route handler: `POST /api/generate` ontvangt `{ audience, platform, tone, framework }`, bouwt de prompt, roept OpenAI aan, retourneert `{ post, prompt, frameworkExplanation }`
+
+## Content generatie flow
+```
+client: FilterPanel → POST /api/generate
+server: selecteer template uit promptLibrary
+        → vul variabelen in
+        → stuur naar OpenAI
+        → retourneer { post, prompt, frameworkExplanation }
+client: toon in ResultPanel
+```
 
 ## State & Data
-- Alle UI-state via `useState` in de root page component
-- Seed-data in `/data/` als TypeScript-objecten (geen JSON-bestanden)
-- Geen database, geen externe API-calls voor MVP
-
-## AI-integratie strategie
-- Fase 1 (MVP): gesimuleerde output via template-matching op (audience × platform × tone × framework)
-- Fase 2 (optioneel): echte Claude/OpenAI-integratie via een dunne service layer in `lib/ai.ts`
-- Prompt templates komen altijd uit `data/promptLibrary.ts` — nooit hardcoded strings in componenten
-
-## Content generatie logica
-```
-selectContent(audience, platform, tone, framework)
-  → kiest prompt template uit promptLibrary
-  → vult template variabelen in
-  → retourneert { post, prompt, frameworkExplanation, whyItWorks }
-```
+- UI-state via `useState` in de root page component
+- Seed-data in `data/` als TypeScript-objecten
+- Geen database
 
 ## Folder conventies
 - `app/` — routes en layouts
+- `app/api/generate/` — route handler voor OpenAI
 - `components/` — herbruikbare UI-componenten
-- `lib/` — pure logica (geen React)
-- `data/` — seed-data en prompt-bibliotheek
+- `lib/` — pure logica (geen React, geen API calls)
+- `data/` — prompt-bibliotheek en config
 - `types/` — gedeelde TypeScript types

@@ -22,9 +22,9 @@ Alle gegenereerde content vertaalt deze boodschap anders per doelgroep en platfo
 ## Kern functionaliteit
 
 1. Kies doelgroep, platform, tone of voice en prompt-framework via een filterpaneel
-2. Zie de gegenereerde social media post
+2. Genereer social media content via OpenAI (gpt-4o-mini)
 3. Zie de bijbehorende prompt die werd gebruikt
-4. Lees uitleg waarom deze prompt werkt
+4. Lees uitleg waarom dit framework werkt
 5. Vergelijk optioneel twee frameworks naast elkaar
 
 ## Doelgroepen
@@ -55,14 +55,6 @@ Alle gegenereerde content vertaalt deze boodschap anders per doelgroep en platfo
 5. Style/Tone Prompting — schrijfstijl expliciet afstemmen op platform en doelgroep
 6. Constraint-Based Prompting — AI krijgt duidelijke beperkingen
 
-## Inzichten die de app moet aantonen
-
-1. Hoe specifieker de prompt, hoe bruikbaarder de output
-2. Prompts met vaste structuur leveren duidelijkere content
-3. Voorbeelden zorgen voor consistenter resultaat dan alleen uitleg
-4. Beperkingen maken output scherper
-5. AI maakt pas echt verschil tussen platforms als dat expliciet in de prompt staat
-
 ## SDG-koppelingen (subtiel verwerken)
 
 - SDG 3: Good Health & Well-being (schermtijd, focus, welzijn)
@@ -71,7 +63,7 @@ Alle gegenereerde content vertaalt deze boodschap anders per doelgroep en platfo
 
 ## Non-Goals
 
-- Echte AI-integratie (mag gesimuleerd via templates)
+- Uitlegpagina's of statische insights secties
 - Auth of user accounts
 - Database of persistente opslag
 - Multi-page routing (single page is voldoende voor demo)
