@@ -1,21 +1,42 @@
 # Structure
 
 ## Root
-Keep the root focused on app entrypoints, config, and project-wide docs. Important top-level areas in this repo are `app/`, `public/`, and `.ai/`.
+Configuratie en project-wide docs in de root. Geen applicatiecode hier.
 
 ## /app
-Main application code lives in `app/` using the Next.js App Router. Routes, layouts, and route-specific UI should stay close to the route that owns them.
+App Router structuur. Één route voor de MVP (`app/page.tsx`). Layout in `app/layout.tsx`.
+
+## /components
+UI-componenten gegroepeerd per verantwoordelijkheid:
+- `HeroSection` — titel + tagline
+- `FilterPanel` — keuzes voor audience / platform / tone / framework
+- `ResultPanel` — tabs: Post | Prompt | Uitleg
+- `InsightsSection` — promptinzichten als cards
+- `CompareMode` — twee frameworks naast elkaar (optioneel)
+- `CopyButton` — copy-to-clipboard helper
+
+## /lib
+Pure TypeScript logica zonder React:
+- `generateContent.ts` — selecteert en vult prompt templates in
+- `selectPrompt.ts` — kiest juiste template op basis van filters
+
+## /data
+Seed-data als TypeScript exports:
+- `audiences.ts`
+- `platforms.ts`
+- `tones.ts`
+- `frameworks.ts`
+- `promptLibrary.ts` — de 6 herbruikbare prompt templates
+- `examples.ts` — pre-written demo output per (audience × platform × tone × framework)
+
+## /types
+Gedeelde TypeScript interfaces en types (`index.ts`).
 
 ## /.ai
-All agent context files live in `.ai/`. This folder defines product intent, technical constraints, structure, and workflow rules.
-
-## Components / Modules
-Group code by feature first, not by type alone. Keep small route-local components near their route. Extract shared UI or logic only when multiple features use it or duplication becomes noisy.
+Agent context: product intent, technische constraints, structuur en workflow-regels.
 
 ## Specs
-Create specs only when needed in `.ai/specs/<feature>/`.
-
-Each spec contains:
+Specs in `.ai/specs/<feature>/` met:
 - `requirements.md`
 - `plan.md`
 - `tasks.md`

@@ -5,19 +5,37 @@
 - React 19
 - TypeScript
 - Tailwind CSS 4
-- ESLint
 
-## Principles
-- simplicity over completeness
-- MVP first
-- minimal dependencies
-- readable code
+## Principes
+- Simplicity over completeness
+- MVP first — demo-waarde boven volledigheid
+- Minimale dependencies — niets toevoegen wat niet nodig is
+- Leesbare code — korte comments waar keuzes niet vanzelfsprekend zijn
 
-## Architecture
-Single Next.js app using the App Router. Keep UI, server logic, and API boundaries in one repo and add route handlers or server actions only when needed.
+## Architectuur
+Single-page Next.js app. Alle interactie draait client-side met React state. Geen route handlers of server actions nodig voor MVP.
 
 ## State & Data
-Start with local component state and lightweight in-repo mock data. Avoid a database until persistence is clearly required. Introduce server-side storage only for proven needs such as saved prompt presets.
+- Alle UI-state via `useState` in de root page component
+- Seed-data in `/data/` als TypeScript-objecten (geen JSON-bestanden)
+- Geen database, geen externe API-calls voor MVP
 
-## AI Integration
-Construct prompts from a small set of inputs: system intent, reusable template, user variables, and target channel. Keep prompt templates explicit and versionable in code. Start with a thin server-side integration boundary so model providers can change without rewriting the UI.
+## AI-integratie strategie
+- Fase 1 (MVP): gesimuleerde output via template-matching op (audience × platform × tone × framework)
+- Fase 2 (optioneel): echte Claude/OpenAI-integratie via een dunne service layer in `lib/ai.ts`
+- Prompt templates komen altijd uit `data/promptLibrary.ts` — nooit hardcoded strings in componenten
+
+## Content generatie logica
+```
+selectContent(audience, platform, tone, framework)
+  → kiest prompt template uit promptLibrary
+  → vult template variabelen in
+  → retourneert { post, prompt, frameworkExplanation, whyItWorks }
+```
+
+## Folder conventies
+- `app/` — routes en layouts
+- `components/` — herbruikbare UI-componenten
+- `lib/` — pure logica (geen React)
+- `data/` — seed-data en prompt-bibliotheek
+- `types/` — gedeelde TypeScript types
