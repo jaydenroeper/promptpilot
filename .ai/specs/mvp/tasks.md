@@ -2,49 +2,35 @@
 
 ## Fase 1 — Types & data
 
-- [ ] **T-01** Maak `types/index.ts` — alle interfaces en union types
-- [ ] **T-02** Maak `data/audiences.ts` — 3 doelgroepen
-- [ ] **T-03** Maak `data/platforms.ts` — 3 platforms
-- [ ] **T-04** Maak `data/tones.ts` — 4 tones
-- [ ] **T-05** Maak `data/frameworks.ts` — 6 frameworks met beschrijving
-- [ ] **T-06** Maak `data/promptLibrary.ts` — 6 prompt templates (één per framework)
+- [x] **T-01** Maak `types/index.ts` — alle interfaces en union types
+- [x] **T-02** Maak `data/audiences.ts` — 3 doelgroepen
+- [x] **T-03** Maak `data/platforms.ts` — 3 platforms
+- [x] **T-04** Maak `data/tones.ts` — 4 tones
+- [x] **T-05** Maak `data/frameworks.ts` — 6 frameworks met beschrijving
+- [x] **T-06** Maak `data/promptLibrary.ts` — 6 prompt templates (één per framework)
 
 ## Fase 2 — API route
 
-- [ ] **T-07** Installeer `openai` package: `npm install openai`
-- [ ] **T-08** Maak `.env.local` met placeholder `OPENAI_API_KEY=`
-- [ ] **T-09** Maak `app/api/generate/route.ts`
-  - Valideer `GenerateRequest` body
-  - Selecteer prompt template uit promptLibrary
-  - Vul placeholders in
-  - Roep `gpt-4o-mini` aan
-  - Retourneer `GenerateResponse`
+- [x] **T-07** Installeer `openai` package: `npm install openai`
+- [x] **T-08** Maak `.env.local` met placeholder `OPENAI_API_KEY=`
+- [x] **T-09** Maak `app/api/generate/route.ts`
 
 ## Fase 3 — UI componenten
 
-- [ ] **T-10** Maak `components/CopyButton.tsx` — clipboard + feedback
-- [ ] **T-11** Maak `components/HeroSection.tsx` — titel + tagline
-- [ ] **T-12** Maak `components/FilterPanel.tsx`
-  - 4 filter-groepen als klikbare chips
-  - "Genereer" knop met loading state
-  - "Random" knop
-- [ ] **T-13** Maak `components/ResultPanel.tsx`
-  - Loading skeleton
-  - Tabs: Post | Prompt | Uitleg
-  - CopyButton per tab
+- [x] **T-10** Maak `components/CopyButton.tsx`
+- [x] **T-11** Maak `components/HeroSection.tsx`
+- [x] **T-12** Maak `components/FilterPanel.tsx`
+- [x] **T-13** Maak `components/ResultPanel.tsx`
 
 ## Fase 4 — Pagina samenstelling
 
-- [ ] **T-14** Herschrijf `app/page.tsx`
-  - State: filters + result + loading
-  - Fetch naar `/api/generate` bij klik
-  - Secties: Hero → Filters → Result
-- [ ] **T-15** Update `app/layout.tsx` — titel "PromptPilot"
+- [x] **T-14** Herschrijf `app/page.tsx`
+- [x] **T-15** Update `app/layout.tsx` — titel "PromptPilot"
 
 ## Fase 5 — Polish
 
-- [ ] **T-16** Responsive check
-- [ ] **T-17** `npm run build` slaagt zonder fouten
+- [x] **T-16** Responsive check
+- [x] **T-17** `npm run build` slaagt zonder fouten ✓
 
 ## Bonus
 
