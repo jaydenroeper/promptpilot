@@ -2,94 +2,105 @@
 
 import { useState } from 'react'
 import TopBar from '@/components/TopBar'
-import FilterPanel from '@/components/FilterPanel'
-import ResultPanel from '@/components/ResultPanel'
-import type { GenerateRequest, GenerateResponse, AudienceId, PlatformId, ToneId, FrameworkId } from '@/types'
+import WizardStepIndicator from '@/components/WizardStepIndicator'
+import PersonaStep from '@/components/PersonaStep'
+import FrameworkStep from '@/components/FrameworkStep'
+import OutputStep from '@/components/OutputStep'
+import type { GenerateResponse, PersonaId, FrameworkId } from '@/types'
 
-const audienceIds: AudienceId[] = ['student', 'young-professional', 'parent']
-const platformIds: PlatformId[] = ['instagram', 'linkedin', 'tiktok']
-const toneIds: ToneId[] = ['informative', 'inspiring', 'playful', 'professional']
-const frameworkIds: FrameworkId[] = ['core', 'create', 'risen', 'para', 'dare', 'road']
-
-function randomPick<T>(arr: T[]): T {
-  return arr[Math.floor(Math.random() * arr.length)]
-}
+type WizardStep = 1 | 2 | 3
 
 export default function HomePage() {
-  const [filters, setFilters] = useState<GenerateRequest>({
-    audienceId: 'student',
-    platformId: 'tiktok',
-    toneId: 'playful',
-    frameworkId: 'core',
-    topic: '',
-  })
+  const [step, setStep] = useState<WizardStep>(1)
+  const [personaId, setPersonaId] = useState<PersonaId | null>(null)
   const [topic, setTopic] = useState('')
+  const [frameworkId, setFrameworkId] = useState<FrameworkId>('core')
   const [result, setResult] = useState<GenerateResponse | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  const handleGenerate = async (overrideFilters?: GenerateRequest, overrideTopic?: string) => {
-    const activeTopic = overrideTopic ?? topic
+  const handleGenerate = async () => {
+    if (!personaId) return
+    setStep(3)
     setLoading(true)
     setError(null)
     try {
       const res = await fetch('/api/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...(overrideFilters ?? filters), topic: activeTopic }),
+        body: JSON.stringify({ personaId, frameworkId, topic }),
       })
       if (!res.ok) throw new Error('Genereren mislukt')
       const data: GenerateResponse = await res.json()
       setResult(data)
     } catch {
       setError('Er ging iets mis. Controleer je API key en probeer opnieuw.')
+      setStep(2)
     } finally {
       setLoading(false)
     }
   }
 
-  // Random vult alleen de filters, nooit het tekstveld
-  const handleRandom = () => {
-    const randomFilters: GenerateRequest = {
-      audienceId: randomPick(audienceIds),
-      platformId: randomPick(platformIds),
-      toneId: randomPick(toneIds),
-      frameworkId: randomPick(frameworkIds),
-      topic,
-    }
-    setFilters(randomFilters)
-    handleGenerate(randomFilters, topic)
+  const handleReset = () => {
+    setStep(1)
+    setPersonaId(null)
+    setTopic('')
+    setFrameworkId('core')
+    setResult(null)
+    setError(null)
   }
 
   return (
-    <div className="flex flex-col h-screen bg-zinc-950 text-white overflow-hidden">
+    <div className="flex flex-col min-h-screen bg-zinc-950 text-white">
       <TopBar />
 
-      {/* Two-column zone — vult resterende hoogte */}
-      <div className="flex-1 overflow-hidden flex flex-col lg:flex-row">
-        {/* Sidebar */}
-        <aside className="lg:w-80 shrink-0 overflow-y-auto border-b border-zinc-800 lg:border-b-0 lg:border-r lg:border-zinc-800">
-          <FilterPanel
-            filters={filters}
-            topic={topic}
-            onTopicChange={setTopic}
-            onChange={setFilters}
-            onGenerate={() => handleGenerate()}
-            onRandom={handleRandom}
-            loading={loading}
-          />
-        </aside>
+      <main className="flex-1 flex flex-col items-center px-4 py-10">
+        <div className="w-full max-w-3xl flex flex-col gap-10">
+          {/* Step indicator */}
+          <div className="flex justify-center">
+            <WizardStepIndicator currentStep={step} />
+          </div>
 
-        {/* Output */}
-        <main className="flex-1 overflow-hidden flex flex-col p-6 gap-4">
+          {/* Error */}
           {error && (
-            <div className="shrink-0 bg-red-950 border border-red-800 text-red-300 text-sm px-4 py-3 rounded-xl">
+            <div className="bg-red-950 border border-red-800 text-red-300 text-sm px-4 py-3 rounded-xl">
               {error}
             </div>
           )}
-          <ResultPanel result={result} loading={loading} />
-        </main>
-      </div>
+
+          {/* Stap inhoud */}
+          {step === 1 && (
+            <PersonaStep
+              selectedPersonaId={personaId}
+              topic={topic}
+              onPersonaSelect={setPersonaId}
+              onTopicChange={setTopic}
+              onNext={() => setStep(2)}
+            />
+          )}
+
+          {step === 2 && (
+            <FrameworkStep
+              selectedFrameworkId={frameworkId}
+              onFrameworkSelect={setFrameworkId}
+              onBack={() => setStep(1)}
+              onGenerate={handleGenerate}
+              loading={loading}
+            />
+          )}
+
+          {step === 3 && (
+            <div className="min-h-96">
+              <OutputStep
+                result={result}
+                loading={loading}
+                onBack={() => setStep(2)}
+                onReset={handleReset}
+              />
+            </div>
+          )}
+        </div>
+      </main>
     </div>
   )
 }

@@ -2,9 +2,7 @@ import { NextResponse } from 'next/server'
 import OpenAI from 'openai'
 import { promptLibrary } from '@/data/promptLibrary'
 import { frameworks } from '@/data/frameworks'
-import { audiences } from '@/data/audiences'
-import { platforms } from '@/data/platforms'
-import { tones } from '@/data/tones'
+import { personas } from '@/data/personas'
 import type { GenerateRequest } from '@/types'
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
@@ -15,26 +13,27 @@ function fillTemplate(template: string, vars: Record<string, string>): string {
 
 export async function POST(request: Request) {
   const body = (await request.json()) as GenerateRequest
-  const { audienceId, platformId, toneId, frameworkId, topic } = body
+  const { personaId, frameworkId, topic } = body
 
   const template = promptLibrary.find((t) => t.frameworkId === frameworkId)
   if (!template) {
     return NextResponse.json({ error: 'Onbekend framework' }, { status: 400 })
   }
 
-  const audience = audiences.find((a) => a.id === audienceId)
-  const platform = platforms.find((p) => p.id === platformId)
-  const tone = tones.find((t) => t.id === toneId)
+  const persona = personas.find((p) => p.id === personaId)
   const framework = frameworks.find((f) => f.id === frameworkId)
 
-  if (!audience || !platform || !tone || !framework) {
-    return NextResponse.json({ error: 'Ongeldige filter waarden' }, { status: 400 })
+  if (!persona || !framework) {
+    return NextResponse.json({ error: 'Ongeldige waarden' }, { status: 400 })
   }
 
   const filledPrompt = fillTemplate(template.template, {
-    audience: audience.label,
-    platform: platform.label,
-    tone: tone.label,
+    persona_name: persona.name,
+    platform: persona.platform_primary,
+    tone: persona.tone.join(', '),
+    style: persona.content_rules.style,
+    pain_points: persona.pain_points.join(', '),
+    avoid: persona.content_rules.avoid.join(', '),
     topic,
   })
 

@@ -1,6 +1,6 @@
 import type { PromptTemplate } from '@/types'
 
-// Placeholders: {{audience}}, {{platform}}, {{tone}}, {{topic}}
+// Placeholders: {{persona_name}}, {{platform}}, {{tone}}, {{style}}, {{pain_points}}, {{avoid}}, {{topic}}
 
 export const promptLibrary: PromptTemplate[] = [
   {
@@ -10,19 +10,20 @@ export const promptLibrary: PromptTemplate[] = [
     description: 'Geeft de AI context, een concreet doel, een rol en een voorbeeldstructuur.',
     template: `[Context]
 We maken een {{platform}}-post over: {{topic}}.
-De doelgroep is {{audience}}.
+Doelgroep: {{persona_name}}.
+Bekende pijnpunten: {{pain_points}}.
 
 [Objective]
-Schrijf één pakkende {{platform}}-post die {{audience}} aanzet tot meer bewustzijn over schermtijd en focus.
+Schrijf één pakkende {{platform}}-post die {{persona_name}} aanzet tot meer bewustzijn over schermtijd en focus.
 
 [Role]
 Je bent een ervaren {{platform}} content creator gespecialiseerd in digitaal welzijn.
-Gebruik taal, humor en stijl die past bij {{platform}} en {{audience}}.
+Schrijfstijl: {{style}}. Toon: {{tone}}.
+Vermijd: {{avoid}}.
 
 [Example]
 Een goede post voor dit platform begint met een sterke openingszin, bevat een concrete tip of inzicht, en sluit af met een vraag of call-to-action.
 
-Tone of voice: {{tone}}.
 Lever alleen de definitieve post.`,
   },
   {
@@ -31,24 +32,24 @@ Lever alleen de definitieve post.`,
     frameworkId: 'create',
     description: 'Stuurt de AI op context, rol, voorbeeld, doelgroep, toon én einddoel tegelijk.',
     template: `[Context]
-Het onderwerp is: {{topic}}.
-Platform: {{platform}}.
+Onderwerp: {{topic}}. Platform: {{platform}}.
 
 [Role]
-Je bent een content strateeg die schrijft voor merken in de gezondheids- en productiviteitsruimte.
+Je bent een content strateeg voor digitaal welzijn.
+Schrijfstijl: {{style}}. Vermijd: {{avoid}}.
 
 [Example]
-Een sterke {{platform}}-post opent met een herkenbare situatie, bouwt op naar een inzicht en eindigt met een duidelijke actie.
+Een sterke {{platform}}-post opent met een herkenbare situatie voor {{persona_name}}, bouwt op naar een inzicht en eindigt met een duidelijke actie.
 
 [Audience]
-Doelgroep: {{audience}}.
-Spreek hen direct aan in taal en toon die bij hun leefwereld past.
+Doelgroep: {{persona_name}}.
+Pijnpunten: {{pain_points}}.
 
 [Tone]
-Tone of voice: {{tone}}.
+Toon: {{tone}}.
 
 [End Goal]
-De post moet {{audience}} op {{platform}} overtuigen om bewuster om te gaan met schermtijd.
+De post moet {{persona_name}} op {{platform}} overtuigen om bewuster om te gaan met schermtijd.
 Lever alleen de definitieve post.`,
   },
   {
@@ -57,24 +58,24 @@ Lever alleen de definitieve post.`,
     frameworkId: 'risen',
     description: 'Laat de AI een nuanced, onderbouwd stuk schrijven vanuit een expertperspectief.',
     template: `[Role]
-Je bent een digitaal welzijn expert en content specialist voor {{platform}}.
+Je bent een digitaal welzijn expert en {{style}} content specialist voor {{platform}}.
+Toon: {{tone}}. Vermijd: {{avoid}}.
 
 [Input]
 Onderwerp: {{topic}}.
-Doelgroep: {{audience}}.
+Doelgroep: {{persona_name}}.
 Platform: {{platform}}.
 
 [Scenario]
-{{audience}} heeft moeite met schermtijd en concentratie in hun dagelijkse leven.
-Ze gebruiken {{platform}} regelmatig en zijn ontvankelijk voor praktische inzichten.
+{{persona_name}} herkent de volgende pijnpunten: {{pain_points}}.
+Ze zijn open voor praktische inzichten die passen bij hun leven.
 
 [Expectation]
 Schrijf een {{platform}}-post die het probleem benoemt, een onderbouwd inzicht biedt en een concrete aanbeveling geeft.
-Tone of voice: {{tone}}.
 
 [Nuance]
-Houd rekening met zowel mensen die net beginnen met digitale detox als mensen die al bewust bezig zijn.
-Vermijd zwart-wit denken. Lever alleen de definitieve post.`,
+Houd rekening met zowel mensen die net beginnen als mensen die al actief werken aan digitale balans.
+Lever alleen de definitieve post.`,
   },
   {
     id: 'para-v1',
@@ -82,20 +83,20 @@ Vermijd zwart-wit denken. Lever alleen de definitieve post.`,
     frameworkId: 'para',
     description: 'Structureert de post als een oplossingsgerichte analyse: probleem → actieplan.',
     template: `[Problem]
-{{audience}} op {{platform}} kampt met: {{topic}}.
+{{persona_name}} op {{platform}} kampt met: {{pain_points}}.
 Ze herkennen het probleem maar weten niet waar te beginnen.
 
 [Analysis]
 De oorzaak ligt in gewoontes, omgeving en de verslavende werking van apps.
-Dit raakt zowel productiviteit als mentale gezondheid.
+Context van het onderwerp: {{topic}}.
 
 [Recommendation]
 Kleine, concrete gedragsveranderingen hebben meer effect dan radicale detox.
-Één bewuste keuze per dag maakt al verschil.
+Schrijfstijl: {{style}}. Toon: {{tone}}.
 
 [Action]
-Schrijf een {{platform}}-post voor {{audience}} die dit inzicht vertaalt naar een directe, uitvoerbare tip.
-Tone of voice: {{tone}}.
+Schrijf een {{platform}}-post voor {{persona_name}} die dit vertaalt naar een directe, uitvoerbare tip.
+Vermijd: {{avoid}}.
 Lever alleen de definitieve post.`,
   },
   {
@@ -104,17 +105,18 @@ Lever alleen de definitieve post.`,
     frameworkId: 'dare',
     description: 'Bouwt een emotioneel verbindend verhaal via scene-setting, actie en versterking.',
     template: `[Describe]
-Schets een herkenbare scène waarin {{audience}} worstelt met schermtijd of focusverlies in hun dagelijks leven.
+Schets een herkenbare scène waarin {{persona_name}} worstelt met: {{pain_points}}.
+Stijl: {{style}}. Toon: {{tone}}.
 
 [Act]
-Introduceer het idee van {{topic}} als de wending — het moment waarop de keuze wordt gemaakt.
+Introduceer {{topic}} als de wending — het moment waarop de keuze wordt gemaakt.
 
 [Resonate]
-Zorg dat {{audience}} zich gezien en begrepen voelt. Spreek hun emotie aan, niet alleen hun ratio.
-Tone of voice: {{tone}}.
+Zorg dat {{persona_name}} zich gezien en begrepen voelt. Spreek hun emotie aan, niet alleen hun ratio.
+Vermijd: {{avoid}}.
 
 [Elevate]
-Sluit af met een zin die inspireert en aanzet tot actie. Maak de boodschap groter dan het individu.
+Sluit af met een zin die inspireert en aanzet tot actie.
 
 Platform: {{platform}}.
 Lever alleen de definitieve post.`,
@@ -125,8 +127,8 @@ Lever alleen de definitieve post.`,
     frameworkId: 'road',
     description: 'Laat de AI opties afwegen en een onderbouwde aanbeveling geven.',
     template: `[Recognize]
-Het kernprobleem voor {{audience}} op {{platform}}: {{topic}}.
-Dit heeft directe impact op hun productiviteit en welzijn.
+Het kernprobleem voor {{persona_name}} op {{platform}}: {{pain_points}}.
+Context: {{topic}}.
 
 [Options]
 Er zijn meerdere manieren om hiermee om te gaan:
@@ -135,12 +137,12 @@ Er zijn meerdere manieren om hiermee om te gaan:
 3. Bewuste schermvrije momenten inplannen
 
 [Analyze]
-Weeg de voor- en nadelen van elke optie af voor {{audience}} specifiek.
+Weeg de opties af voor {{persona_name}} specifiek. Stijl: {{style}}.
 Houd rekening met hun leefstijl en realistische haalbaarheid.
 
 [Decide]
-Geef een heldere aanbeveling en schrijf dit om naar een {{platform}}-post voor {{audience}}.
-Tone of voice: {{tone}}.
+Geef een heldere aanbeveling en schrijf dit om naar een {{platform}}-post.
+Toon: {{tone}}. Vermijd: {{avoid}}.
 Lever alleen de definitieve post.`,
   },
 ]
