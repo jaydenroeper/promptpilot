@@ -15,7 +15,7 @@ function fillTemplate(template: string, vars: Record<string, string>): string {
 
 export async function POST(request: Request) {
   const body = (await request.json()) as GenerateRequest
-  const { audienceId, platformId, toneId, frameworkId } = body
+  const { audienceId, platformId, toneId, frameworkId, topic } = body
 
   const template = promptLibrary.find((t) => t.frameworkId === frameworkId)
   if (!template) {
@@ -35,7 +35,7 @@ export async function POST(request: Request) {
     audience: audience.label,
     platform: platform.label,
     tone: tone.label,
-    topic: 'minder schermtijd en meer focus',
+    topic,
   })
 
   const completion = await openai.chat.completions.create({

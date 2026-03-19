@@ -28,19 +28,22 @@ export default function HomePage() {
     platformId: 'tiktok',
     toneId: 'playful',
     frameworkId: 'role-based',
+    topic: '',
   })
+  const [topic, setTopic] = useState('')
   const [result, setResult] = useState<GenerateResponse | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  const handleGenerate = async (overrideFilters?: GenerateRequest) => {
+  const handleGenerate = async (overrideFilters?: GenerateRequest, overrideTopic?: string) => {
+    const activeTopic = overrideTopic ?? topic
     setLoading(true)
     setError(null)
     try {
       const res = await fetch('/api/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(overrideFilters ?? filters),
+        body: JSON.stringify({ ...(overrideFilters ?? filters), topic: activeTopic }),
       })
       if (!res.ok) throw new Error('Genereren mislukt')
       const data: GenerateResponse = await res.json()
@@ -52,39 +55,48 @@ export default function HomePage() {
     }
   }
 
+  // Random vult alleen de filters, nooit het tekstveld
   const handleRandom = () => {
     const randomFilters: GenerateRequest = {
       audienceId: randomPick(audienceIds),
       platformId: randomPick(platformIds),
       toneId: randomPick(toneIds),
       frameworkId: randomPick(frameworkIds),
+      topic,
     }
     setFilters(randomFilters)
-    handleGenerate(randomFilters)
+    handleGenerate(randomFilters, topic)
   }
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white">
-      <div className="max-w-3xl mx-auto px-4 pb-20">
+    <div className="flex flex-col h-screen bg-zinc-950 text-white overflow-hidden">
+      {/* Hero — vaste hoogte bovenaan */}
+      <div className="shrink-0">
         <HeroSection />
+      </div>
 
-        <div className="space-y-6">
+      {/* Two-column zone — vult resterende hoogte, elke kolom scrollt intern */}
+      <div className="flex-1 overflow-hidden grid grid-cols-1 lg:grid-cols-2 gap-6 px-6 pb-6">
+        <aside className="overflow-y-auto">
           <FilterPanel
             filters={filters}
+            topic={topic}
+            onTopicChange={setTopic}
             onChange={setFilters}
             onGenerate={() => handleGenerate()}
             onRandom={handleRandom}
             loading={loading}
           />
+        </aside>
 
+        <main className="overflow-y-auto flex flex-col gap-4">
           {error && (
             <div className="bg-red-950 border border-red-800 text-red-300 text-sm px-4 py-3 rounded-xl">
               {error}
             </div>
           )}
-
           <ResultPanel result={result} loading={loading} />
-        </div>
+        </main>
       </div>
     </div>
   )

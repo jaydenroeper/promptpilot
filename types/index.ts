@@ -48,6 +48,7 @@ export interface GenerateRequest {
   platformId: PlatformId
   toneId: ToneId
   frameworkId: FrameworkId
+  topic: string
 }
 
 export interface GenerateResponse {

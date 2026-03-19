@@ -8,6 +8,8 @@ import type { GenerateRequest, AudienceId, PlatformId, ToneId, FrameworkId } fro
 
 interface Props {
   filters: GenerateRequest
+  topic: string
+  onTopicChange: (topic: string) => void
   onChange: (filters: GenerateRequest) => void
   onGenerate: () => void
   onRandom: () => void
@@ -47,9 +49,33 @@ function ChipGroup<T extends string>({
   )
 }
 
-export default function FilterPanel({ filters, onChange, onGenerate, onRandom, loading }: Props) {
+export default function FilterPanel({
+  filters,
+  topic,
+  onTopicChange,
+  onChange,
+  onGenerate,
+  onRandom,
+  loading,
+}: Props) {
+  const canGenerate = topic.trim().length > 0
+
   return (
     <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 space-y-5">
+      {/* Campagneonderwerp — vrij tekstveld */}
+      <div>
+        <p className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-2">
+          Campagneonderwerp
+        </p>
+        <input
+          type="text"
+          value={topic}
+          onChange={(e) => onTopicChange(e.target.value)}
+          placeholder="Bijv. minder schermtijd en meer focus"
+          className="w-full bg-zinc-950 border border-zinc-700 rounded-xl px-4 py-3 text-sm text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-indigo-500 transition-colors"
+        />
+      </div>
+
       <ChipGroup<AudienceId>
         label="Doelgroep"
         options={audiences}
@@ -78,16 +104,17 @@ export default function FilterPanel({ filters, onChange, onGenerate, onRandom, l
       <div className="flex gap-3 pt-2">
         <button
           onClick={onGenerate}
-          disabled={loading}
-          className="flex-1 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3 rounded-xl transition-colors"
+          disabled={loading || !canGenerate}
+          className="flex-1 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold py-3 rounded-xl transition-colors"
         >
           {loading ? 'Genereren…' : 'Genereer content'}
         </button>
+        {/* Random vult alleen de filters, nooit het tekstveld */}
         <button
           onClick={onRandom}
           disabled={loading}
           className="px-4 py-3 bg-zinc-800 hover:bg-zinc-700 disabled:opacity-50 text-zinc-300 rounded-xl transition-colors text-sm"
-          title="Random scenario"
+          title="Willekeurige filters"
         >
           ⚡
         </button>
