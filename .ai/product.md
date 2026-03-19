@@ -39,15 +39,15 @@ Elke persona bundelt platform, tone en gedragscontext in één object — direct
 - Content rules: short sentences, hook-driven, simple language
 
 ### Young Professional
-- Leeftijd: 23–35 | Platform: LinkedIn / Instagram
+- Leeftijd: 23–35 | Platform: LinkedIn
 - Tone: professional, clear, insightful, lightly inspirational
 - Pain points: distraction at work, low productivity, digital overload
 - Content rules: medium sentences, insight-driven, clear and structured
 
-### Parent
-- Leeftijd: 30–50 | Platform: Instagram / Facebook
-- Tone: warm, empathetic, trustworthy, calm
-- Pain points: screen time children, lack of balance, family disconnect
+### Senior
+- Leeftijd: 55+ | Platform: Facebook
+- Tone: warm, trustworthy, clear, calm
+- Pain points: digital overwhelm, too much screen time, social isolation
 - Content rules: medium sentences, storytelling, accessible language
 
 ## Prompt-frameworks

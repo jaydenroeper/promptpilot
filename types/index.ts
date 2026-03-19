@@ -1,4 +1,4 @@
-export type PersonaId = 'student' | 'young_professional' | 'parent'
+export type PersonaId = 'student' | 'young_professional' | 'senior'
 export type FrameworkId =
   | 'core'
   | 'create'

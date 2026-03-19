@@ -72,19 +72,19 @@ Sidebar-filter UI omzetten naar een 3-stappen wizard. Losse audience/platform/to
       }
     },
     {
-      "id": "parent",
-      "name": "Parent",
-      "age_range": "30-50",
-      "platform_primary": "Instagram",
-      "platform_secondary": "Facebook",
-      "tone": ["warm", "empathetic", "trustworthy", "calm"],
-      "pain_points": ["screen time children", "lack of balance", "family disconnect"],
-      "motivations": ["healthy habits", "quality time", "family wellbeing"],
+      "id": "senior",
+      "name": "Senior",
+      "age_range": "55+",
+      "platform_primary": "Facebook",
+      "platform_secondary": "WhatsApp",
+      "tone": ["warm", "trustworthy", "clear", "calm"],
+      "pain_points": ["digital overwhelm", "too much screen time", "social isolation"],
+      "motivations": ["staying connected", "simplicity", "health and wellbeing"],
       "content_rules": {
         "sentence_length": "medium",
         "style": "storytelling",
         "language": "accessible",
-        "avoid": ["judgmental tone", "technical jargon"]
+        "avoid": ["technical jargon", "slang"]
       }
     }
   ]
