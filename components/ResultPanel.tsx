@@ -4,7 +4,7 @@ import { useState } from 'react'
 import CopyButton from './CopyButton'
 import type { GenerateResponse } from '@/types'
 
-type Tab = 'post' | 'prompt' | 'uitleg'
+type Tab = 'post' | 'prompt'
 
 interface Props {
   result: GenerateResponse | null
@@ -28,7 +28,6 @@ export default function ResultPanel({ result, loading }: Props) {
   const tabs: { id: Tab; label: string }[] = [
     { id: 'post', label: 'Post' },
     { id: 'prompt', label: 'Prompt' },
-    { id: 'uitleg', label: 'Uitleg' },
   ]
 
   return (
@@ -82,13 +81,6 @@ export default function ResultPanel({ result, loading }: Props) {
               </div>
             )}
 
-            {activeTab === 'uitleg' && (
-              <div className="space-y-3">
-                <p className="text-zinc-200 text-sm leading-relaxed">
-                  {result.frameworkExplanation}
-                </p>
-              </div>
-            )}
           </>
         )}
       </div>
