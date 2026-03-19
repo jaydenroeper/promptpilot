@@ -9,14 +9,7 @@ import type { GenerateRequest, GenerateResponse, AudienceId, PlatformId, ToneId,
 const audienceIds: AudienceId[] = ['student', 'young-professional', 'parent']
 const platformIds: PlatformId[] = ['instagram', 'linkedin', 'tiktok']
 const toneIds: ToneId[] = ['informative', 'inspiring', 'playful', 'professional']
-const frameworkIds: FrameworkId[] = [
-  'role-based',
-  'structured-output',
-  'few-shot',
-  'chain-of-thought',
-  'style-tone',
-  'constraint-based',
-]
+const frameworkIds: FrameworkId[] = ['core', 'create', 'risen', 'para', 'dare', 'road']
 
 function randomPick<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)]
@@ -27,7 +20,7 @@ export default function HomePage() {
     audienceId: 'student',
     platformId: 'tiktok',
     toneId: 'playful',
-    frameworkId: 'role-based',
+    frameworkId: 'core',
     topic: '',
   })
   const [topic, setTopic] = useState('')

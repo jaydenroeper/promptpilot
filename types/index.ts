@@ -2,12 +2,12 @@ export type AudienceId = 'student' | 'young-professional' | 'parent'
 export type PlatformId = 'instagram' | 'linkedin' | 'tiktok'
 export type ToneId = 'informative' | 'inspiring' | 'playful' | 'professional'
 export type FrameworkId =
-  | 'role-based'
-  | 'structured-output'
-  | 'few-shot'
-  | 'chain-of-thought'
-  | 'style-tone'
-  | 'constraint-based'
+  | 'core'
+  | 'create'
+  | 'risen'
+  | 'para'
+  | 'dare'
+  | 'road'
 
 export interface Audience {
   id: AudienceId

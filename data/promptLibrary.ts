@@ -1,102 +1,146 @@
 import type { PromptTemplate } from '@/types'
 
 // Placeholders: {{audience}}, {{platform}}, {{tone}}, {{topic}}
-// topic is altijd: "minder schermtijd en meer focus"
 
 export const promptLibrary: PromptTemplate[] = [
   {
-    id: 'role-based-v1',
-    name: 'Role-Based Prompt',
-    frameworkId: 'role-based',
-    description: 'Geeft de AI een expliciete rol als content creator voor het gekozen platform.',
-    template: `Je bent een ervaren {{platform}} content creator gespecialiseerd in gezondheid en digitaal welzijn.
+    id: 'core-v1',
+    name: 'C.O.R.E. Prompt',
+    frameworkId: 'core',
+    description: 'Geeft de AI context, een concreet doel, een rol en een voorbeeldstructuur.',
+    template: `[Context]
+We maken een {{platform}}-post over: {{topic}}.
+De doelgroep is {{audience}}.
 
-Schrijf één {{platform}}-post voor de doelgroep: {{audience}}.
-Onderwerp: {{topic}}.
+[Objective]
+Schrijf één pakkende {{platform}}-post die {{audience}} aanzet tot meer bewustzijn over schermtijd en focus.
+
+[Role]
+Je bent een ervaren {{platform}} content creator gespecialiseerd in digitaal welzijn.
+Gebruik taal, humor en stijl die past bij {{platform}} en {{audience}}.
+
+[Example]
+Een goede post voor dit platform begint met een sterke openingszin, bevat een concrete tip of inzicht, en sluit af met een vraag of call-to-action.
+
 Tone of voice: {{tone}}.
-
-Schrijf de post alsof je volledig in die rol zit. Gebruik taal, humor en stijl die past bij {{platform}} en die {{audience}} direct aanspreekt.`,
+Lever alleen de definitieve post.`,
   },
   {
-    id: 'structured-output-v1',
-    name: 'Structured Output Prompt',
-    frameworkId: 'structured-output',
-    description: 'Geeft de AI een verplichte structuur: hook, body, CTA en hashtags.',
-    template: `Schrijf een {{platform}}-post voor {{audience}} over het onderwerp: {{topic}}.
-Tone of voice: {{tone}}.
+    id: 'create-v1',
+    name: 'C.R.E.A.T.E. Prompt',
+    frameworkId: 'create',
+    description: 'Stuurt de AI op context, rol, voorbeeld, doelgroep, toon én einddoel tegelijk.',
+    template: `[Context]
+Het onderwerp is: {{topic}}.
+Platform: {{platform}}.
 
-Gebruik exact deze structuur:
-HOOK: één pakkende openingszin die direct de aandacht trekt
-BODY: 2-3 zinnen met de kernboodschap
-CTA: één duidelijke call-to-action
-HASHTAGS: 3-5 relevante hashtags
+[Role]
+Je bent een content strateeg die schrijft voor merken in de gezondheids- en productiviteitsruimte.
 
-Houd je strikt aan dit format.`,
-  },
-  {
-    id: 'few-shot-v1',
-    name: 'Few-Shot Prompt',
-    frameworkId: 'few-shot',
-    description: 'Geeft de AI voorbeeldposts mee zodat stijl en toon consistent worden.',
-    template: `Schrijf een {{platform}}-post voor {{audience}} over: {{topic}}.
-Tone of voice: {{tone}}.
+[Example]
+Een sterke {{platform}}-post opent met een herkenbare situatie, bouwt op naar een inzicht en eindigt met een duidelijke actie.
 
-Hier zijn twee voorbeelden van goede posts in deze stijl:
-
-Voorbeeld 1:
-"Je telefoon wint het niet van je hersenen — tenzij je dat toelaat. Probeer vandaag één uur zonder scherm. Wat merk je?"
-
-Voorbeeld 2:
-"3 uur scrollen. Wat heb je er voor terug? Meer focus begint met één bewuste keuze. Download de app en start vandaag."
-
-Schrijf nu een nieuwe post in dezelfde stijl, maar met een frisse invalshoek voor {{audience}} op {{platform}}.`,
-  },
-  {
-    id: 'chain-of-thought-v1',
-    name: 'Chain-of-Thought Prompt',
-    frameworkId: 'chain-of-thought',
-    description: 'Laat de AI stapsgewijs redeneren voor inhoudelijk sterkere output.',
-    template: `Je gaat een {{platform}}-post schrijven voor {{audience}} over: {{topic}}.
-Tone of voice: {{tone}}.
-
-Denk eerst stap voor stap na:
-1. Wat is de grootste uitdaging van {{audience}} rondom schermtijd?
-2. Welke boodschap raakt hen het meest op {{platform}}?
-3. Hoe formuleer je die boodschap in een {{tone}} toon?
-
-Schrijf daarna de definitieve post op basis van je analyse. Geef alleen de eindpost terug, niet de tussenstappen.`,
-  },
-  {
-    id: 'style-tone-v1',
-    name: 'Style / Tone Prompt',
-    frameworkId: 'style-tone',
-    description: 'Beschrijft nauwkeurig hoe de tekst moet klinken per platform en doelgroep.',
-    template: `Schrijf een {{platform}}-post over: {{topic}}.
+[Audience]
 Doelgroep: {{audience}}.
+Spreek hen direct aan in taal en toon die bij hun leefwereld past.
 
-Schrijfstijl voor {{platform}}:
-- Toon: {{tone}}
-- Zinslengte: kort en krachtig voor TikTok, iets langer voor LinkedIn, emotioneel voor Instagram
-- Woordkeuze: gebruik taal die {{audience}} herkent en waardeert
-- Energie: hoog en direct voor TikTok, reflectief en professioneel voor LinkedIn, warm en persoonlijk voor Instagram
-
-Pas deze stijl consequent toe in de hele post.`,
-  },
-  {
-    id: 'constraint-based-v1',
-    name: 'Constraint-Based Prompt',
-    frameworkId: 'constraint-based',
-    description: 'Geeft de AI expliciete beperkingen voor scherpere, direct inzetbare output.',
-    template: `Schrijf een {{platform}}-post voor {{audience}} over: {{topic}}.
+[Tone]
 Tone of voice: {{tone}}.
 
-Houd je aan deze beperkingen:
-- Maximaal 150 woorden
-- Verplicht: één concrete call-to-action aan het einde
-- Maximaal 3 emoji (0 voor LinkedIn)
-- Verboden: clichés zoals "in deze drukke tijden" of "neem de regie"
-- Verplicht: begin met een zin die direct de pijnpunt van {{audience}} benoemt
+[End Goal]
+De post moet {{audience}} op {{platform}} overtuigen om bewuster om te gaan met schermtijd.
+Lever alleen de definitieve post.`,
+  },
+  {
+    id: 'risen-v1',
+    name: 'R.I.S.E.N. Prompt',
+    frameworkId: 'risen',
+    description: 'Laat de AI een nuanced, onderbouwd stuk schrijven vanuit een expertperspectief.',
+    template: `[Role]
+Je bent een digitaal welzijn expert en content specialist voor {{platform}}.
 
-Lever alleen de definitieve post, geen uitleg.`,
+[Input]
+Onderwerp: {{topic}}.
+Doelgroep: {{audience}}.
+Platform: {{platform}}.
+
+[Scenario]
+{{audience}} heeft moeite met schermtijd en concentratie in hun dagelijkse leven.
+Ze gebruiken {{platform}} regelmatig en zijn ontvankelijk voor praktische inzichten.
+
+[Expectation]
+Schrijf een {{platform}}-post die het probleem benoemt, een onderbouwd inzicht biedt en een concrete aanbeveling geeft.
+Tone of voice: {{tone}}.
+
+[Nuance]
+Houd rekening met zowel mensen die net beginnen met digitale detox als mensen die al bewust bezig zijn.
+Vermijd zwart-wit denken. Lever alleen de definitieve post.`,
+  },
+  {
+    id: 'para-v1',
+    name: 'P.A.R.A. Prompt',
+    frameworkId: 'para',
+    description: 'Structureert de post als een oplossingsgerichte analyse: probleem → actieplan.',
+    template: `[Problem]
+{{audience}} op {{platform}} kampt met: {{topic}}.
+Ze herkennen het probleem maar weten niet waar te beginnen.
+
+[Analysis]
+De oorzaak ligt in gewoontes, omgeving en de verslavende werking van apps.
+Dit raakt zowel productiviteit als mentale gezondheid.
+
+[Recommendation]
+Kleine, concrete gedragsveranderingen hebben meer effect dan radicale detox.
+Één bewuste keuze per dag maakt al verschil.
+
+[Action]
+Schrijf een {{platform}}-post voor {{audience}} die dit inzicht vertaalt naar een directe, uitvoerbare tip.
+Tone of voice: {{tone}}.
+Lever alleen de definitieve post.`,
+  },
+  {
+    id: 'dare-v1',
+    name: 'D.A.R.E. Prompt',
+    frameworkId: 'dare',
+    description: 'Bouwt een emotioneel verbindend verhaal via scene-setting, actie en versterking.',
+    template: `[Describe]
+Schets een herkenbare scène waarin {{audience}} worstelt met schermtijd of focusverlies in hun dagelijks leven.
+
+[Act]
+Introduceer het idee van {{topic}} als de wending — het moment waarop de keuze wordt gemaakt.
+
+[Resonate]
+Zorg dat {{audience}} zich gezien en begrepen voelt. Spreek hun emotie aan, niet alleen hun ratio.
+Tone of voice: {{tone}}.
+
+[Elevate]
+Sluit af met een zin die inspireert en aanzet tot actie. Maak de boodschap groter dan het individu.
+
+Platform: {{platform}}.
+Lever alleen de definitieve post.`,
+  },
+  {
+    id: 'road-v1',
+    name: 'R.O.A.D. Prompt',
+    frameworkId: 'road',
+    description: 'Laat de AI opties afwegen en een onderbouwde aanbeveling geven.',
+    template: `[Recognize]
+Het kernprobleem voor {{audience}} op {{platform}}: {{topic}}.
+Dit heeft directe impact op hun productiviteit en welzijn.
+
+[Options]
+Er zijn meerdere manieren om hiermee om te gaan:
+1. Digitale detox (volledig stoppen)
+2. Tijdslimieten instellen per app
+3. Bewuste schermvrije momenten inplannen
+
+[Analyze]
+Weeg de voor- en nadelen van elke optie af voor {{audience}} specifiek.
+Houd rekening met hun leefstijl en realistische haalbaarheid.
+
+[Decide]
+Geef een heldere aanbeveling en schrijf dit om naar een {{platform}}-post voor {{audience}}.
+Tone of voice: {{tone}}.
+Lever alleen de definitieve post.`,
   },
 ]

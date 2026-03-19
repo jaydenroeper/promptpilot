@@ -2,45 +2,45 @@ import type { Framework } from '@/types'
 
 export const frameworks: Framework[] = [
   {
-    id: 'role-based',
-    name: 'Role-Based Prompting',
-    goal: 'AI krijgt een specifieke rol of perspectief',
+    id: 'core',
+    name: 'C.O.R.E.',
+    goal: 'Snelle, heldere prompts voor short-form content',
     description:
-      'Je geeft de AI een expliciete identiteit zoals "social media strategist" of "TikTok creator". Dit zorgt voor een consistente schrijfstijl en een helder perspectief in de output.',
+      'C.O.R.E. staat voor Context · Objective · Role · Example. Je geeft de AI achtergrond, een concreet doel, een expliciete rol én een voorbeeldstructuur. Eenvoudig en effectief voor LinkedIn posts, ad copy en e-mail subject lines.',
   },
   {
-    id: 'structured-output',
-    name: 'Structured Output Prompting',
-    goal: 'Output krijgt een vaste structuur',
+    id: 'create',
+    name: 'C.R.E.A.T.E.',
+    goal: 'Maximale creativiteit én precisie',
     description:
-      'Je vraagt de AI om de content op te bouwen in een vast format: hook → body → CTA → hashtags. Dit levert direct inzetbare posts op zonder verdere opmaak.',
+      'C.R.E.A.T.E. staat voor Context · Role · Example · Audience · Tone · End Goal. Dit framework stuurt op merk, doelgroep én gewenst resultaat tegelijk. Ideaal voor brand messaging, lange blogposts en video scripts.',
   },
   {
-    id: 'few-shot',
-    name: 'Few-Shot Prompting',
-    goal: 'AI krijgt voorbeelden mee',
+    id: 'risen',
+    name: 'R.I.S.E.N.',
+    goal: 'Analyse & thought leadership',
     description:
-      'Je geeft de AI één of meer voorbeeldposts zodat de stijl, toon en structuur consistenter worden. Voorbeelden sturen beter dan alleen uitleg.',
+      'R.I.S.E.N. staat voor Role · Input · Scenario · Expectation · Nuance. De AI krijgt data, een realworld scenario en de opdracht om meerdere perspectieven mee te nemen. Sterk voor whitepapers, LinkedIn artikelen en strategie-analyses.',
   },
   {
-    id: 'chain-of-thought',
-    name: 'Chain-of-Thought Prompting',
-    goal: 'AI wordt stapsgewijs gestuurd',
+    id: 'para',
+    name: 'P.A.R.A.',
+    goal: 'Probleemoplossing',
     description:
-      'Je vraagt de AI om eerst na te denken over de doelgroep, het platform en de boodschap, voordat de post wordt geschreven. Dit leidt tot inhoudelijk sterkere output.',
+      'P.A.R.A. staat voor Problem · Analysis · Recommendation · Action. De AI breekt een marketingprobleem op in vier stappen en levert een concrete actieplan. Ideaal voor performance reports, campagne-optimalisatie en crisis management.',
   },
   {
-    id: 'style-tone',
-    name: 'Style / Tone Prompting',
-    goal: 'Schrijfstijl expliciet afstemmen op platform en doelgroep',
+    id: 'dare',
+    name: 'D.A.R.E.',
+    goal: 'Creativiteit & storytelling',
     description:
-      'Je beschrijft nauwkeurig hoe de tekst moet klinken: woordkeuze, zinslengte, energie, formeel of informeel. Zo sluit de post precies aan op het platform.',
+      'D.A.R.E. staat voor Describe · Act · Resonate · Elevate. Je zet een scène, definieert de kernactie, stuurt op emotionele verbinding en vraagt om versterking van impact. Perfect voor merkstories en creatieve campagneconcepts.',
   },
   {
-    id: 'constraint-based',
-    name: 'Constraint-Based Prompting',
-    goal: 'AI krijgt duidelijke beperkingen',
+    id: 'road',
+    name: 'R.O.A.D.',
+    goal: 'Besluitvorming & strategie',
     description:
-      'Je stelt expliciete eisen: max. woorden, verplichte CTA, max. emoji, verplicht een statistiek, verboden clichés. Beperkingen maken de output scherper en bruikbaarder.',
+      'R.O.A.D. staat voor Recognize · Options · Analyze · Decide. De AI identificeert het kernprobleem, presenteert meerdere opties, weegt de voor- en nadelen en geeft een onderbouwde aanbeveling. Sterk voor strategische marketingkeuzes.',
   },
 ]
