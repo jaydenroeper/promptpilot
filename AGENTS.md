@@ -1,5 +1,18 @@
-<!-- BEGIN:nextjs-agent-rules -->
-# This is NOT the Next.js you know
+# Agent Guide
 
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
-<!-- END:nextjs-agent-rules -->
+Always read:
+- `.ai/product.md`
+- `.ai/tech.md`
+- `.ai/structure.md`
+- `.ai/guidelines.md`
+
+Follow the workflow strictly.
+
+Work spec-driven:
+- create a spec if it is missing for a non-trivial feature
+- implement from `tasks.md` only
+
+Prioritize:
+- working MVP
+- speed
+- clarity
