@@ -14,10 +14,10 @@ Doelgroep: {{persona_name}}.
 Bekende pijnpunten: {{pain_points}}.
 
 [Objective]
-Schrijf één pakkende {{platform}}-post die {{persona_name}} aanzet tot meer bewustzijn over schermtijd en focus.
+Schrijf één pakkende {{platform}}-post die {{persona_name}} aanzet tot actie of bewustwording rond {{topic}}.
 
 [Role]
-Je bent een ervaren {{platform}} content creator gespecialiseerd in digitaal welzijn.
+Je bent een ervaren {{platform}} content creator.
 Schrijfstijl: {{style}}. Toon: {{tone}}.
 Vermijd: {{avoid}}.
 
@@ -35,7 +35,7 @@ Lever alleen de definitieve post.`,
 Onderwerp: {{topic}}. Platform: {{platform}}.
 
 [Role]
-Je bent een content strateeg voor digitaal welzijn.
+Je bent een content strateeg gespecialiseerd in {{topic}}.
 Schrijfstijl: {{style}}. Vermijd: {{avoid}}.
 
 [Example]
@@ -49,7 +49,7 @@ Pijnpunten: {{pain_points}}.
 Toon: {{tone}}.
 
 [End Goal]
-De post moet {{persona_name}} op {{platform}} overtuigen om bewuster om te gaan met schermtijd.
+De post moet {{persona_name}} op {{platform}} overtuigen om iets te doen of anders te denken over {{topic}}.
 Lever alleen de definitieve post.`,
   },
   {
@@ -58,7 +58,7 @@ Lever alleen de definitieve post.`,
     frameworkId: 'risen',
     description: 'Laat de AI een nuanced, onderbouwd stuk schrijven vanuit een expertperspectief.',
     template: `[Role]
-Je bent een digitaal welzijn expert en {{style}} content specialist voor {{platform}}.
+Je bent een expert op het gebied van {{topic}} en een {{style}} content specialist voor {{platform}}.
 Toon: {{tone}}. Vermijd: {{avoid}}.
 
 [Input]
@@ -68,13 +68,13 @@ Platform: {{platform}}.
 
 [Scenario]
 {{persona_name}} herkent de volgende pijnpunten: {{pain_points}}.
-Ze zijn open voor praktische inzichten die passen bij hun leven.
+Ze zijn open voor praktische inzichten die passen bij hun situatie.
 
 [Expectation]
 Schrijf een {{platform}}-post die het probleem benoemt, een onderbouwd inzicht biedt en een concrete aanbeveling geeft.
 
 [Nuance]
-Houd rekening met zowel mensen die net beginnen als mensen die al actief werken aan digitale balans.
+Houd rekening met verschillende niveaus van ervaring binnen de doelgroep.
 Lever alleen de definitieve post.`,
   },
   {
@@ -87,11 +87,10 @@ Lever alleen de definitieve post.`,
 Ze herkennen het probleem maar weten niet waar te beginnen.
 
 [Analysis]
-De oorzaak ligt in gewoontes, omgeving en de verslavende werking van apps.
-Context van het onderwerp: {{topic}}.
+Analyseer de kern van het probleem in de context van {{topic}}.
 
 [Recommendation]
-Kleine, concrete gedragsveranderingen hebben meer effect dan radicale detox.
+Benoem een concrete aanpak die aansluit bij {{topic}} en haalbaar is voor {{persona_name}}.
 Schrijfstijl: {{style}}. Toon: {{tone}}.
 
 [Action]
@@ -109,7 +108,7 @@ Schets een herkenbare scène waarin {{persona_name}} worstelt met: {{pain_points
 Stijl: {{style}}. Toon: {{tone}}.
 
 [Act]
-Introduceer {{topic}} als de wending — het moment waarop de keuze wordt gemaakt.
+Introduceer {{topic}} als de wending — het moment waarop iets verandert.
 
 [Resonate]
 Zorg dat {{persona_name}} zich gezien en begrepen voelt. Spreek hun emotie aan, niet alleen hun ratio.
@@ -131,14 +130,11 @@ Het kernprobleem voor {{persona_name}} op {{platform}}: {{pain_points}}.
 Context: {{topic}}.
 
 [Options]
-Er zijn meerdere manieren om hiermee om te gaan:
-1. Digitale detox (volledig stoppen)
-2. Tijdslimieten instellen per app
-3. Bewuste schermvrije momenten inplannen
+Benoem drie realistische manieren waarop {{persona_name}} met {{topic}} aan de slag kan gaan.
 
 [Analyze]
 Weeg de opties af voor {{persona_name}} specifiek. Stijl: {{style}}.
-Houd rekening met hun leefstijl en realistische haalbaarheid.
+Houd rekening met hun situatie en realistische haalbaarheid.
 
 [Decide]
 Geef een heldere aanbeveling en schrijf dit om naar een {{platform}}-post.
